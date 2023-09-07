@@ -1,12 +1,15 @@
+// Добавляем ноды
 const resultElement = document.getElementById("result");
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
 const submitBtn = document.getElementById("submit");
 const plusBtn = document.getElementById("plus");
 const minusBtn = document.getElementById("minus");
+
+// Меняеться в зависимости от выбранной кнопки действия
 let action = "+";
 
-
+// Создаем функции
 function computeNumbersWithAction(inp1, inp2, actionSymbol) {
     const num1 = Number(inp1.value);
     const num2 = Number(inp2.value);
@@ -28,7 +31,7 @@ function printResult(result) {
     resultElement.textContent = result;
 };
 
-
+// Создаем обработчики событий
 plusBtn.onclick = function () {
     action = "+";
 };
