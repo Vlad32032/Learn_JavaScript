@@ -55,5 +55,37 @@ console.log("isProgrammer = true, isProgrammer type -", typeof isProgrammer);
 console.log("let x, x type -", typeof x);
 
 console.log("null type -", typeof null);
+console.log(" ");
 
-// 1:35:00
+/* Priority */
+console.log("-- Приоритеты --");
+
+const fullAge = 29;
+const birthYear = 1995;
+const correntYear = 2023;
+
+// < > <= >=
+
+console.log("fullAge = 29;");
+console.log("birthYear = 1995;");
+console.log("correntYear = 2023;");
+console.log("correntYear < birthYear -", correntYear < birthYear);
+console.log("correntYear - birthYear <= fullAge -", correntYear - birthYear <= fullAge);
+console.log(" ");
+
+// == and ===
+const num1 = 42;
+const num2 = "42";
+
+console.log("num1 = 42");
+console.log("num2 = '42'");
+console.log("Does num1 == num2 ?");
+console.log(num1 == num2);
+console.log(" ");
+
+console.log("Does num1 === num2 ?");
+console.log(num1 === num2);
+console.log(" ");
+
+
+
