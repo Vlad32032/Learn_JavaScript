@@ -15,7 +15,6 @@ function getNoteTemplate(title) {
         >
             <span>${title}</span>
             <span>
-                <button class="btn btn-small btn-success">&check;</button>
                 <button class="btn btn-small btn-danger">&times;</button>
             </span>
         </li>
@@ -70,7 +69,6 @@ createBtn.onclick = function () {
             >
                 <span>${inputElement.value}</span>
                 <span>
-                    <button class="btn btn-small btn-success">&check;</button>
                     <button class="btn btn-small btn-danger">&times;</button>
                 </span>
             </li>
@@ -96,10 +94,92 @@ const notes = [
     {
         title: "Запись 2",
         complited: false
+    },
+    {
+        title: "Запись 3",
+        complited: false
     }
 ];
 
-function render() {
+function getNoteTemplate(note, index) {
+    return `
+        <li
+            class="list-group-item d-flex
+            justify-content-between align-items-center"
+        >
+            <span class="${note.complited ? "text-decoration-line-through text-info" : ""}">
+                ${note.title}
+            </span>
+            <span>
+                <button
+                    class="btn btn-small btn-${note.complited ? "warning" : "success"}"
+                    data-index="${index}" 
+                    data-type="toggle"
+                >
+                    ${note.complited ? "&times;" : "&check;"}
+                </button>
+                <button
+                    class="btn btn-small btn-danger"
+                    data-index="${index}"
+                    data-type="remove"
+                >
+                    &times;
+                </button>
+            </span>
+        </li>
+    `;
 };
+
+function render(arrayNotes) {
+    listElement.innerHTML = "";
+
+    if (notes.length === 0) {
+        listElement.innerHTML = `<li class="list-group-item">Список заметок пуст</li>`;
+        return
+    };
+
+    for (let i = 0; i < arrayNotes.length; i++) {
+        listElement.insertAdjacentHTML("beforeend", getNoteTemplate(arrayNotes[i], i));
+    };
+};
+
+createBtn.onclick = function () {
+    if (inputElement.value.length === 0) {
+        return
+    };
+
+    const newNote = {
+        title: inputElement.value,
+        complited: false
+    };
+
+    notes.push(newNote);
+    inputElement.value = "";
+    render(notes);
+};
+
+listElement.onclick = function (event) {
+    console.log(event.target);
+    console.log(event.target.dataset);
+
+    if (event.target.dataset.index) {
+        const index = Number(event.target.dataset.index);
+        const type = event.target.dataset.type;
+
+        if (type === "toggle") {
+            console.log("btn-toggle:", index);
+
+            notes[index].complited = !notes[index].complited;
+        } else if (type === "remove") {
+            console.log("btn-remove:", index);
+
+            notes.splice(index, 1);
+        };
+
+        render(notes);
+    };
+};
+
+render(notes);
 
 // */
