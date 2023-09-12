@@ -185,6 +185,3 @@ version2Btn.onclick = function () {
     descriptionElement.innerHTML = description[1];
     startSecondVersionApp();
 };
-
-// startFirstVersionApp()
-
