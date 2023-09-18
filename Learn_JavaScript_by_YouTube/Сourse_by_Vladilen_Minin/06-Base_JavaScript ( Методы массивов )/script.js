@@ -1,6 +1,6 @@
 /* Методы массивов */
 
-// -- Открой консоль --
+// -- Откройте консоль --
 
 const namesOne = ["Влад", "Наташа", "Полина"];
 const namesTwo = ["Катя","Лена","Света","Соня"];
@@ -240,7 +240,7 @@ console.log(" ");
 console.log("   ", "Метод .find():");
 // Метод .find() (Метод для работы с массивом с объектами) принимает функцию и возвращает элемент из массива(объект) если в return true
 // Обязательно в return должно попасть true/false
-// Eсли такого элемента нет, вернет undefind
+// Eсли такого элемента нет, вернет undefined
 console.log("people -", people);
 const findPerson = people.find(function (person) {
     if (person.budget === 15000) { // можно так
