@@ -3,13 +3,21 @@
 // -- Открой консоль --
 
 const namesOne = ["Влад", "Наташа", "Полина"];
-const namesTwo = ["Катя","Лена","Света","Лена"];
+const namesTwo = ["Катя","Лена","Света","Соня"];
 
 const numsOne = [3, 54, 5, 12, 2, 1, 7, 17];
 const numsTwo = [3, 54, 5, 12, 2, 1, 7, 17];
 
 const lettersOne = ["d", "a", "e", "b", "c"];
 const lettersTwo = ["d", "a", "e", "b", "c"];
+
+const people = [
+    {name: "Влад", budget: 9000},
+    {name: "Наташа", budget: 5000},
+    {name: "Полина", budget: 15000},
+    {name: "Варя", budget: 12000},
+    {name: "Марк", budget: 3000}
+];
 
 // -- Все эти методы мутируют(изменяют) исходный массив --
 console.log("   ", "Методы мутирующие массив:");
@@ -109,6 +117,8 @@ console.log(" ");
 
 console.log(" ");
 
+
+
 // -- Все эти методы НЕ мутируют исходный массив --
 console.log("   ", "Методы не мутирующие массив:")
 console.log(" ");
@@ -128,6 +138,34 @@ const changedNames = namesOne.map(function (name) {
 console.log(`const changedNames = namesOne.map(function (name) { return name.toLocaleUpperCase() })`);
 console.log("changedNames -", changedNames);
 console.log("namesOne -", namesOne);
+console.log(" ");
+
+    // .forEach()
+
+console.log("   ", "Метод .forEach():");
+// Меторд .forEach() по аналогии с .map() перебирает массив но не изменеят исходный и не возвращает новый а просто выполняет какую-то итерацию
+console.log("numsOne -", numsOne);
+let sumOfnumsOne = 0; 
+numsOne.forEach(function (num) {
+    sumOfnumsOne += num;
+});
+// вариант во стрелочной функцией: numsOne.forEach(n => sumOfnumsOne += num)
+console.log(`const sumOfnumsOne = numsOne.forEach();`);
+console.log("sumOfnumsOne -", sumOfnumsOne);
+console.log("numsOne -", numsOne);
+console.log(" ");
+
+    // .reduse() 
+
+console.log("   ", "Метод .reduse():");
+// Метод .reduse() принимает 2-м параеметорм начальное значаение а 1-м функцию
+// Функция уже принимает 1-м параметром аккамулятор(начальное значение которое изменеяться на каждой итерации)
+// 2-м параемтром элемент из массива
+// и возвращает аккамулятор
+console.log("numsTwo -", numsTwo);
+const sumOfnumsTwo = numsTwo.reduce((acc, num) => acc + num, 0)
+console.log("sumOfnumsTwo -", sumOfnumsTwo);
+console.log("numsTwo -", numsTwo);
 console.log(" ");
 
     // .toReversed()
@@ -178,7 +216,7 @@ console.log(" ");
 
     // .includes()
 
-console.log("   ", "Метод .with():");
+console.log("   ", "Метод .includes():");
 // Метод .includes() провереят есть ли такой элемент в массиве и возвращает true/false
 console.log("namesOne -", namesOne);
 const doseIncludesName = namesOne.includes("Влад");
@@ -197,17 +235,74 @@ console.log("newNames -", newNames);
 console.log("namesOne -", namesOne);
 console.log(" ");
 
+    // .find()
+
+console.log("   ", "Метод .find():");
+// Метод .find() (Метод для работы с массивом с объектами) принимает функцию и возвращает элемент из массива(объект) если в return true
+// Обязательно в return должно попасть true/false
+// Eсли такого элемента нет, вернет undefind
+console.log("people -", people);
+const findPerson = people.find(function (person) {
+    if (person.budget === 15000) { // можно так
+        return true
+    }
+    
+    // return person.budget === 15000 // можно так
+});
+// вариант во стрелочной функцией: people.find(p => p.budget === 15000)
+console.log(`const findPerson = people.find((p) => p.budget === 15000`);
+console.log("findPerson", findPerson);
+console.log(" ");
+    
+    // .findIndex()
+    
+console.log("   ", "Метод .findIndex():");
+// Метод ..findIndex() (Метод для работы с массивом с объектами) принимает функцию и возвращает индекс элемента из массива(объект) если в return true
+// Обязательно в return должно попасть true/false
+// Eсли такого элемента нет, вернет -1 по аналогии с .indexOf()
+console.log("people -", people);
+const findPersonIndex = people.findIndex(function (person) {
+    if (person.budget === 15000) { // можно так
+        return true
+    }
+    
+    // return person.budget === 15000 // можно так
+});
+// вариант во стрелочной функцией: people.find(p => p.budget === 15000)
+console.log(`const findPersonIndex = people.findIndex((p) => p.budget === 15000`);
+console.log("findPersonIndex", findPersonIndex);
+console.log(" ");
+    
+    // .filter()
+
+console.log("   ", "Метод .filter():");
+// Метод .filter() (Метод для работы с массивом с объектами) принимает функцию и возвращает все элементы в return которых попрала true
+// Обязательно в return должно попасть true/false
+console.log("people -", people);
+const filteredPeople = people.filter(function (person) {
+    return person.budget > 5000;
+});
+// вариант во стрелочной функцией: people.filter(p => person.budget > 5000)
+console.log(`const filteredPeople = people.filter(p => person.budget > 5000);`)
+console.log("filteredPeople", filteredPeople);
+console.log(" ");
 
 
 
+// Пример функционального програмирования:
+// Считаем сумарный бюджет всех людей в массиве у кого бюджет больше 5000
+
+const byBudget = (p) => p.budget > 5000;
+const pickBudget = (p) => p.budget;
+
+const sumOfRichPeople = people
+    .filter(byBudget)
+    .map(pickBudget)
+    .reduce((acc, budget) => acc + budget, 0)
+
+console.log(sumOfRichPeople)
 
 
 
 // шаблон
-
-console.log("   ", "Метод :");
-console.log(``);
-console.log(" ");
-
-// 3:12:00
-
+// console.log("   ", "Метод :");
