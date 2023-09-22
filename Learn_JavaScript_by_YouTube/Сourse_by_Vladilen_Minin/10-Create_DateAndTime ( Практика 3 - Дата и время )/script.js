@@ -40,3 +40,39 @@ console.log(nowDate.toDateString())
 console.log(nowDate.toTimeString())
 console.log(nowDate.toLocaleDateString())
 console.log(nowDate.toLocaleTimeString())
+
+
+
+// Пробую реализовать функционал сам ( до просмотра видео по этой теме )
+
+const output = document.getElementById('output')
+const btnFull = document.getElementById('full')
+const btnDate = document.getElementById('date')
+const btnTime = document.getElementById('time')
+
+const renderTime = () => output.innerHTML = new Date().toLocaleTimeString()
+const renderDate = () => output.innerHTML = new Date().toLocaleDateString()
+const renderFullDate = () => output.innerHTML = new Date().toLocaleString()
+
+let interval 
+
+btnTime.onclick = () => {
+    clearInterval(interval)
+    renderTime()
+    interval = setInterval(renderTime, 1000)
+}
+
+btnDate.onclick = () => {
+    clearInterval(interval)
+    output.innerHTML = new Date().toLocaleDateString()
+}
+
+btnFull.onclick = () => {
+    clearInterval(interval)
+    renderFullDate()
+    interval = setInterval(renderFullDate, 1000)
+}
+
+renderDate()
+
+// работает)
