@@ -45,6 +45,8 @@ console.log(nowDate.toLocaleTimeString())
 
 // Пробую реализовать функционал сам ( до просмотра видео по этой теме )
 
+/*
+
 const output = document.getElementById('output')
 const btnFull = document.getElementById('full')
 const btnDate = document.getElementById('date')
@@ -75,4 +77,52 @@ btnFull.onclick = () => {
 
 renderDate()
 
+*/
+
 // работает)
+
+
+
+// Реализация из видео
+
+const output = document.getElementById('output')
+const btnFull = document.getElementById('full')
+const btnDate = document.getElementById('date')
+const btnTime = document.getElementById('time')
+
+let mode = "time"
+
+setInterval(update, 1000)
+
+function update() {
+    output.textContent = format(mode)
+}
+
+function format(formatMode) {
+    const now = new Date()
+
+    switch (formatMode) {
+        case 'time': 
+            return now.toLocaleTimeString()
+        case 'date': 
+            return now.toLocaleDateString()
+        case 'full': 
+            return now.toLocaleString()
+        default:
+            return now.toLocaleTimeString()
+    }
+}
+
+// пример замыкания
+function bindMode(name) {
+    return () => {
+        mode = name
+        update()
+    }
+}
+
+btnFull.onclick = bindMode('full')
+btnDate.onclick = bindMode('date')
+btnTime.onclick = bindMode('time')
+
+update()
